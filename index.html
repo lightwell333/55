@@ -183,9 +183,12 @@ addEventListener('selectstart', e=> e.preventDefault(), {passive:false});
   UI.modeM.onclick = ()=> state.mode=1;
 
   function fit(){
-    const dpr=Math.min(devicePixelRatio||1,2);
-    const w=Math.floor(innerWidth*dpr), h=Math.floor(innerHeight*dpr);
-    if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; }
+  const SCALE = 1; // set to 2 for ultra-crisp (heavier on GPU/CPU)
+  const dpr = (devicePixelRatio || 1) * SCALE;
+  const w = Math.floor(innerWidth  * dpr);
+  const h = Math.floor(innerHeight * dpr);
+  if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+}
   }
   addEventListener('resize', fit, {passive:true}); fit();
 
